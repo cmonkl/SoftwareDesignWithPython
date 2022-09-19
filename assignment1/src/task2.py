@@ -1,30 +1,24 @@
 import inspect
-import contextlib, io, time
+from task1 import decorator_1
 
 def add_spaces(string, num_spaces=15):
     return (" " * num_spaces).join(string.splitlines(1))
 
 def decorator_2(func):
     def wrapper(*args, **kwargs):
-        wrapper.count += 1
-
-        start = time.perf_counter()
-        with contextlib.redirect_stdout(io.StringIO()) as f:
-            func(*args, **kwargs)
-        end = time.perf_counter()
-
-        print(f'{func.__name__} call {wrapper.count} executed in {(end - start):.4f} sec')
+        dec_1 = decorator_1(func)
+        func_res = dec_1(*args, **kwargs)
 
         signature = inspect.signature(func)
-        pad = 15
+        pad = 14
         print('Name: '.ljust(pad), func.__name__)
         print('Type: '.ljust(pad), type(func))
-        print('Args: '.ljust(pad))
-        print('positional: '.ljust(pad), add_spaces(f'{args}'))
-        print('key-worded: '.ljust(pad), add_spaces(f'{kwargs}'))
-        print('Signature: '.ljust(pad), add_spaces(str(signature)))
+        print('Sign: '.ljust(pad), add_spaces(str(signature)))
+        print('Args: '.ljust(pad), add_spaces(f'positional {args}'))
+        print(' '.ljust(pad), add_spaces(f'key-worded {kwargs} \n'))
+        print('Doc: '.ljust(pad-4), add_spaces(func.__doc__[1:-1] if func.__doc__ is not None else "\n", 11))
         print('Source: '.ljust(pad), add_spaces(inspect.getsource(func)))
-        print('Output: '.ljust(pad), add_spaces(f.getvalue()))
+        print('Output: '.ljust(pad), add_spaces(dec_1.func_output))
+        return func_res
 
-    wrapper.count = 0
     return wrapper
