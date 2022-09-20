@@ -12,7 +12,7 @@ class Decorator_2_1(Decorator_1):
             return func_res
         except Exception as err:
             with open("error_logs.txt", "a+") as f:
-                f.write(f"Error: {str(err)}")
+                f.write(f"\nError: {str(err)}")
                 timestamp = datetime.now().strftime("%d-%b-%Y (%H:%M:%S)")
                 f.write(f", Timestamp: {timestamp}")
 

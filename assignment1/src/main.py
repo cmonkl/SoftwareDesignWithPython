@@ -6,6 +6,7 @@ from task4 import Decorator_2_1
 import math
 
 
+@Decorator_2
 def sort_dict_by_value(dictionary):
     """
     Function to perform ascending sort of dictionary values
@@ -15,6 +16,7 @@ def sort_dict_by_value(dictionary):
     return dict(sorted(dictionary.items(), key=lambda x: x[1]))
 
 
+@Decorator_2
 def find_arr_intersection(arr1, arr2):
     """
     Function to find intersection of two lists
@@ -25,7 +27,7 @@ def find_arr_intersection(arr1, arr2):
     return list(filter(lambda x: x in arr1, arr2))
 
 
-@Decorator_2
+@Decorator_2_1
 def pascal_triangle(n):
     """
     Function to print Pascal's triangle up to n lines
