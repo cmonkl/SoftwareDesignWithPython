@@ -6,7 +6,6 @@ time_exec = {}
 
 
 def rank_exec():
-    global time_exec
     return dict(sorted(time_exec.items(), key=lambda x: x[1]))
 
 
@@ -30,7 +29,6 @@ class Decorator_1:
         self.func_output = None
 
     def __call__(self, *args, **kwargs):
-        global time_exec
         self.num_calls += 1
 
         start = time.perf_counter()
